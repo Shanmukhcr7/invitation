@@ -28,6 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const hideIntro = () => {
     if (introSkipped) return;
     introSkipped = true;
+    
+    // Try to autoplay music
+    if (!isPlaying) {
+      toggleMusic();
+    }
+
     gsap.to(introScreen, {
       yPercent: -100,
       duration: 1.5,
@@ -52,17 +58,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleMusic = () => {
     if (isPlaying) {
       bgAudio.pause();
-      musicIcon.textContent = '♪';
+      musicIcon.innerHTML = '&#9833;';
       musicToggle.classList.remove('playing');
     } else {
-      bgAudio.play().catch(e => console.log("Audio play prevented:", e));
-      musicIcon.textContent = '♫';
+      bgAudio.play().catch(e => console.log("Audio play prevented by browser:", e));
+      musicIcon.innerHTML = '&#9835;';
       musicToggle.classList.add('playing');
     }
     isPlaying = !isPlaying;
   };
 
   musicToggle.addEventListener('click', toggleMusic);
+
+  // Fallback for browsers that block autoplay: play on first user interaction anywhere
+  document.body.addEventListener('click', () => {
+    if (!isPlaying && introSkipped) {
+      toggleMusic();
+    }
+  }, { once: true });
 
   // Countdown Logic
   const targetDate = new Date("Aug 22, 2026 17:25:00").getTime();
