@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: harika-bikshamaiah-wedding
+    env: static
+    buildCommand: "" # No build step required for static HTML
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: "public, max-age=31536000"
+      - path: /*.html
+        name: Cache-Control
+        value: "no-cache"

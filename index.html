@@ -1,868 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harika & Bikshamaiah | Wedding Invitation</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
-
-    :root {
-      color-scheme: light;
-      --bg: #f7f0e3;
-      --surface: #fbf5ed;
-      --surface-strong: #f2e7d8;
-      --text: #3a2a1e;
-      --muted: #77614f;
-      --accent: #b8895a;
-      --accent-soft: #c9a06a;
-      --rose: #d9a9a0;
-      --divider: rgba(184,137,90,0.35);
-      --shadow: 0 35px 120px rgba(58,42,30,0.08);
-      --transition: 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      background: radial-gradient(circle at top, #fbf5ed 0%, #f7f0e3 48%, #efe2c8 100%);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at top center, rgba(255,255,255,0.25), transparent 26%),
-                  radial-gradient(circle at 20% 30%, rgba(200,160,106,0.1), transparent 12%),
-                  radial-gradient(circle at 80% 12%, rgba(217,169,160,0.08), transparent 10%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .page-wrap {
-      position: relative;
-      z-index: 1;
-    }
-
-    button, input, textarea {
-      font: inherit;
-    }
-
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: grid;
-      align-items: center;
-      justify-items: center;
-      padding: 2rem 1.5rem 4rem;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(247,240,227,0.52) 0%, rgba(247,240,227,0.92) 45%, rgba(247,240,227,1) 100%);
-      pointer-events: none;
-    }
-
-    .hero-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .hero-content {
-      position: relative;
-      max-width: 840px;
-      text-align: center;
-      z-index: 1;
-      padding: 2rem 1.25rem;
-      border: 1px solid rgba(184,137,90,0.14);
-      border-radius: 36px;
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-content::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.8), transparent 35%);
-      mix-blend-mode: screen;
-    }
-
-    .hero-label {
-      color: var(--muted);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-    }
-
-    .hero-title {
-      margin: 0;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(3.2rem, 6vw, 6rem);
-      line-height: 0.9;
-      letter-spacing: -0.05em;
-      color: #3a2a1e;
-    }
-
-    .hero-title span {
-      display: block;
-    }
-
-    .hero-divider {
-      width: 120px;
-      height: 1px;
-      margin: 1.5rem auto;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      position: relative;
-    }
-
-    .hero-divider::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 26px;
-      height: 4px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      box-shadow: 0 0 24px rgba(200,160,106,0.3);
-    }
-
-    .hero-subtitle {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      margin: 0;
-      color: #5b3f2d;
-      letter-spacing: 0.04em;
-    }
-
-    .portrait-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.2rem;
-      margin-top: 2rem;
-      align-items: end;
-    }
-
-    .portrait-card {
-      position: relative;
-      border-radius: 30px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid rgba(184,137,90,0.16);
-      box-shadow: 0 26px 60px rgba(58,42,30,0.1);
-      isolation: isolate;
-    }
-
-    .portrait-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35), transparent 32%), linear-gradient(180deg, rgba(255,255,255,0.18), transparent 45%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .portrait-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      aspect-ratio: 4 / 5;
-      position: relative;
-      z-index: 0;
-    }
-
-    .portrait-card .sparkle,
-    .couple-showcase-image .sparkle {
-      position: absolute;
-      display: inline-block;
-      font-size: 1rem;
-      color: rgba(255,255,255,0.95);
-      text-shadow: 0 0 12px rgba(255,255,255,0.85);
-      pointer-events: none;
-      z-index: 3;
-      animation: sparkleFloat 3.2s ease-in-out infinite;
-    }
-
-    .portrait-card .sparkle-one {
-      top: 0.8rem;
-      left: 0.8rem;
-    }
-
-    .portrait-card .sparkle-two {
-      top: 1.1rem;
-      right: 0.9rem;
-      animation-delay: -1.2s;
-    }
-
-    .portrait-caption {
-      padding: 1rem 1.2rem 1.3rem;
-      text-align: center;
-      background: rgba(255,255,255,0.95);
-    }
-
-    .portrait-caption h3 {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: #3a2a1e;
-    }
-
-    .portrait-caption span {
-      display: block;
-      margin-top: 0.35rem;
-      color: var(--muted);
-      font-size: 0.9rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .couple-showcase {
-      padding-top: 1rem;
-    }
-
-    .couple-showcase-card {
-      margin: 2rem auto 0;
-      max-width: 1080px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(250,241,228,0.95));
-      border: 1px solid rgba(184,137,90,0.22);
-      border-radius: 42px;
-      box-shadow: 0 40px 120px rgba(58,42,30,0.14);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.16fr 0.84fr;
-      align-items: center;
-      position: relative;
-    }
-
-    .couple-showcase-card::before {
-      content: '';
-      position: absolute;
-      inset: 16px;
-      border: 1px solid rgba(184,137,90,0.24);
-      border-radius: 30px;
-      pointer-events: none;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
-    }
-
-    .couple-showcase-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(184,137,90,0.08), transparent 38%, rgba(217,169,160,0.12) 100%);
-      pointer-events: none;
-    }
-
-    .couple-showcase-card .gold-accent {
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border: 1px solid rgba(184,137,90,0.2);
-      border-radius: 50%;
-      opacity: 0.75;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .couple-showcase-card .gold-accent.top-right {
-      top: -90px;
-      right: -90px;
-      border-color: rgba(184,137,90,0.24);
-    }
-
-    .couple-showcase-card .gold-accent.bottom-left {
-      left: -90px;
-      bottom: -90px;
-      border-color: rgba(217,169,160,0.22);
-    }
-
-    .couple-showcase-image {
-      position: relative;
-      min-height: 100%;
-      background: linear-gradient(135deg, rgba(223,184,140,0.25), rgba(255,255,255,0.14));
-      padding: 1.15rem;
-    }
-
-    .couple-showcase-image::before {
-      content: '';
-      position: absolute;
-      inset: 1.15rem;
-      border: 1px solid rgba(255,255,255,0.7);
-      border-radius: 24px;
-      pointer-events: none;
-      box-shadow: inset 0 0 0 1px rgba(184,137,90,0.1);
-    }
-
-    .couple-showcase-image img {
-      width: 100%;
-      height: 100%;
-      max-height: 640px;
-      object-fit: cover;
-      display: block;
-      border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(58,42,30,0.18);
-    }
-
-    .couple-showcase-content {
-      position: relative;
-      z-index: 1;
-      padding: 2.4rem 2.1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .couple-showcase-content .eyebrow {
-      display: inline-block;
-      margin: 0;
-      padding: 0.48rem 0.9rem;
-      border-radius: 999px;
-      background: linear-gradient(120deg, rgba(184,137,90,0.2), rgba(217,169,160,0.22));
-      color: #9b6f46;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      width: fit-content;
-      box-shadow: inset 0 0 0 1px rgba(184,137,90,0.14);
-    }
-
-    .couple-showcase-content h2 {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.9rem, 2.6vw, 2.65rem);
-      line-height: 1.18;
-      text-align: left;
-      color: #3a2a1e;
-      letter-spacing: -0.01em;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.4);
-    }
-
-    .couple-showcase-content p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.95;
-      font-size: 1.02rem;
-    }
-
-    .couple-showcase-content::before {
-      content: '“';
-      position: absolute;
-      top: 0.2rem;
-      left: 0.5rem;
-      font-family: 'Great Vibes', cursive;
-      font-size: 5rem;
-      line-height: 1;
-      color: rgba(184,137,90,0.18);
-      pointer-events: none;
-    }
-
-    .section {
-      position: relative;
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem;
-    }
-
-    .section + .section {
-      margin-top: -4rem;
-    }
-
-    .section::before {
-      content: '';
-      position: absolute;
-      top: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 1px;
-      background: radial-gradient(circle, rgba(184,137,90,0.55), transparent 60%);
-      opacity: 0.7;
-    }
-
-    .section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 2.4vw, 2.8rem);
-      margin: 0 0 1rem;
-      letter-spacing: -0.03em;
-      text-align: center;
-    }
-
-    .section p.lead {
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-      color: var(--muted);
-      line-height: 1.85;
-      font-size: 1rem;
-    }
-
-    .card {
-      margin: 2rem auto 0;
-      max-width: 860px;
-      padding: 2.5rem 2rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(248,239,227,0.9));
-      border: 1px solid rgba(184,137,90,0.2);
-      border-radius: 38px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(184,137,90,0.06), transparent 40%, rgba(255,255,255,0.07) 100%);
-      pointer-events: none;
-    }
-
-    .gold-frame {
-      position: absolute;
-      inset: 14px;
-      border: 1px solid rgba(184,137,90,0.24);
-      border-radius: 28px;
-      pointer-events: none;
-    }
-
-    .card p {
-      position: relative;
-      z-index: 1;
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.9;
-      font-size: 1rem;
-    }
-
-    .countdown-grid {
-      margin-top: 2rem;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .countdown-card {
-      text-align: center;
-      padding: 1.4rem 1rem;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.82);
-      border: 1px solid rgba(184,137,90,0.18);
-      box-shadow: 0 12px 40px rgba(58,42,30,0.06);
-    }
-
-    .countdown-value {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      margin-bottom: 0.3rem;
-      color: #3a2a1e;
-    }
-
-    .countdown-label {
-      font-size: 0.88rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .scratch-panel {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .scratch-card {
-      position: relative;
-      width: min(100%, 720px);
-      min-height: 320px;
-      border-radius: 34px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(184,137,90,0.16);
-      background: linear-gradient(135deg, #faf4e8, #f5e7cf);
-    }
-
-    .scratch-back {
-      position: absolute;
-      inset: 0;
-      padding: 2rem;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      background: linear-gradient(135deg, rgba(255,251,244,0.95) 0%, rgba(245,231,207,0.92) 100%);
-    }
-
-    .scratch-back h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.9rem, 3vw, 2.5rem);
-      margin: 0 0 0.7rem;
-      color: #3a2a1e;
-    }
-
-    .scratch-back p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-
-    .scratch-overlay {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-    }
-
-    .timeline {
-      margin-top: 2rem;
-      display: grid;
-      gap: 1rem;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 1rem;
-      align-items: start;
-      padding: 1.25rem 1.2rem;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(184,137,90,0.16);
-      box-shadow: 0 10px 35px rgba(58,42,30,0.05);
-      position: relative;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 0.75rem;
-      top: 1.2rem;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 5px rgba(184,137,90,0.14);
-    }
-
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: 1.2rem;
-      top: 2.35rem;
-      bottom: -1rem;
-      width: 1px;
-      background: linear-gradient(180deg, rgba(184,137,90,0.36), transparent);
-    }
-
-    .timeline-item:last-child::after {
-      display: none;
-    }
-
-    .timeline-label {
-      padding-left: 1.4rem;
-      font-size: 0.94rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .timeline-content h3 {
-      margin: 0 0 0.4rem;
-      font-family: 'Playfair Display', serif;
-      color: #3a2a1e;
-      font-size: 1.2rem;
-    }
-
-    .timeline-content p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .map-grid {
-      margin-top: 2rem;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 1rem;
-      align-items: stretch;
-    }
-
-    .map-card, .rsvp-card {
-      padding: 1.25rem;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(184,137,90,0.16);
-      box-shadow: 0 16px 48px rgba(58,42,30,0.06);
-      overflow: hidden;
-    }
-
-    .map-card iframe {
-      width: 100%;
-      min-height: 360px;
-      border: 0;
-      border-radius: 20px;
-      background: #ebe3d7;
-    }
-
-    .map-card p {
-      margin-top: 1.05rem;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .map-card a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-block;
-      margin-top: 0.25rem;
-    }
-
-    .rsvp-grid {
-      margin-top: 2rem;
-      display: grid;
-      gap: 1rem;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-
-    .field label {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      border: 1px solid rgba(184,137,90,0.18);
-      background: rgba(255,255,255,0.9);
-      border-radius: 16px;
-      padding: 0.95rem 1rem;
-      color: var(--text);
-      box-shadow: inset 0 2px 6px rgba(58,42,30,0.03);
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: rgba(184,137,90,0.45);
-      box-shadow: 0 0 0 4px rgba(200,160,106,0.12);
-    }
-
-    textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .rsvp-extra {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.5rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .music-control {
-      position: fixed;
-      right: 1.25rem;
-      bottom: 1.25rem;
-      z-index: 99;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 24px 70px rgba(58,42,30,0.16);
-      border: 1px solid rgba(184,137,90,0.18);
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .music-control:hover {
-      transform: translateY(-4px);
-    }
-
-    .music-control span {
-      display: grid;
-      place-items: center;
-      width: 100%;
-      height: 100%;
-      font-size: 1.35rem;
-      color: #9f7a4f;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 2rem 1.5rem 3rem;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .footer strong {
-      color: var(--text);
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-    }
-
-    .reveal-on-scroll {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.85s ease, transform 0.85s ease;
-    }
-
-    .visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes sparkleFloat {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-        opacity: 0.75;
-      }
-      50% {
-        transform: translateY(-7px) scale(1.12);
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 860px) {
-      .hero {
-        padding-top: 3rem;
-      }
-
-      .hero-content {
-        padding: 1.8rem 1.3rem;
-        border-radius: 32px;
-      }
-
-      .countdown-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item::after {
-        left: 0.75rem;
-      }
-
-      .timeline-item::before {
-        left: 0.75rem;
-      }
-
-      .couple-showcase-card {
-        grid-template-columns: 1fr;
-      }
-
-      .couple-showcase-image {
-        padding: 0.9rem;
-      }
-
-      .couple-showcase-image img {
-        max-height: 480px;
-      }
-
-      .couple-showcase-content {
-        padding: 1.5rem 1.2rem 1.8rem;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero-content {
-        padding: 1.5rem 1rem;
-      }
-
-      .hero-title {
-        font-size: 3rem;
-      }
-
-      .hero-subtitle {
-        font-size: 2.2rem;
-      }
-
-      .section {
-        padding: 3rem 1rem;
-      }
-
-      .couple-showcase-content {
-        padding: 1.5rem 1rem 1.75rem;
-      }
-
-      .scratch-card, .map-card {
-        min-height: 260px;
-      }
-
-      .music-control {
-        right: 1rem;
-        bottom: 1rem;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harika & Bikshamaiah | Premium Wedding Invitation</title>
+  <meta name="description" content="You are cordially invited to the wedding of Harika and Bikshamaiah on 22 August 2026.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <div class="page-wrap">
-    <section class="hero">
-      <canvas class="hero-canvas" id="heroCanvas"></canvas>
-      <div class="hero-content">
+<body class="loading">
+
+  <!-- Background Canvases -->
+  <canvas id="bg-canvas-3d"></canvas>
+  <canvas id="bg-canvas-2d"></canvas>
+
+  <!-- Cinematic Intro -->
+  <div id="intro-screen">
+    <div class="intro-overlay"></div>
+    <div class="intro-content">
+      <div id="lottie-lotus" class="lottie-container"></div>
+      <div class="intro-text-wrapper">
+        <h3 class="intro-text intro-t1">Together with their Families</h3>
+        <h3 class="intro-text intro-t2">We cordially invite you</h3>
+      </div>
+      <div class="intro-names">
+        <span class="intro-name intro-bride">Harika</span>
+        <span class="intro-heart">❤</span>
+        <span class="intro-name intro-groom">Bikshamaiah</span>
+      </div>
+    </div>
+    <button id="skip-intro" class="skip-btn">Skip Intro <span>&rarr;</span></button>
+  </div>
+
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-content glass-morphism">
         <div class="hero-label">A celebration of union</div>
-        <h1 class="hero-title"><span>Harika</span><span>&amp;</span><span>Bikshamaiah</span></h1>
-        <div class="hero-divider"></div>
+        <h1 class="hero-title">
+          <span class="title-word">Harika</span>
+          <span class="title-amp">&amp;</span>
+          <span class="title-word">Bikshamaiah</span>
+        </h1>
+        <div class="hero-divider">
+          <div class="divider-dot"></div>
+        </div>
         <p class="hero-subtitle">The wedding of Harika &amp; Bikshamaiah</p>
+        
         <div class="portrait-grid">
-          <div class="portrait-card">
-            <span class="sparkle sparkle-one">✦</span>
-            <span class="sparkle sparkle-two">✦</span>
-            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAADpKADAAQAAAABAAAFeAAAAAD/wAARCAV4A6QDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2u" alt="Bikshamaiah, the groom" />
+          <div class="portrait-card tilt-effect">
+            <div class="portrait-img-wrapper">
+              <img src="assets/images/groom.jpeg" alt="Bikshamaiah, the groom" loading="lazy" />
+              <div class="sparkle sparkle-1">✦</div>
+              <div class="image-overlay"></div>
+            </div>
             <div class="portrait-caption">
               <h3>Bikshamaiah</h3>
               <span>Groom, son of (late) Sri Maloji Chennaiah &amp; Smt Sugunamma</span>
             </div>
           </div>
-          <div class="portrait-card">
-            <span class="sparkle sparkle-one">✦</span>
-            <span class="sparkle sparkle-two">✦</span>
-            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAADpKADAAQAAAABAAAFeAAAAAD/wAARCAV4A6QDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2u" alt="Harika, the bride" />
+          
+          <div class="portrait-card tilt-effect">
+            <div class="portrait-img-wrapper">
+              <img src="assets/images/bride.jpeg" alt="Harika, the bride" loading="lazy" />
+              <div class="sparkle sparkle-2">✦</div>
+              <div class="image-overlay"></div>
+            </div>
             <div class="portrait-caption">
               <h3>Harika</h3>
               <span>Bride, daughter of Medikonda Balaiah &amp; Nirmala</span>
@@ -872,221 +82,246 @@
       </div>
     </section>
 
-    <section class="section couple-showcase" id="couple">
-      <div class="couple-showcase-card reveal-on-scroll">
-        <div class="gold-accent top-right"></div>
-        <div class="gold-accent bottom-left"></div>
-        <div class="couple-showcase-image">
-          <span class="sparkle sparkle-three">✦</span>
-          <span class="sparkle sparkle-four">✦</span>
-          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAADpKADAAQAAAABAAAFeAAAAAD/wAARCAV4A6QDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2u" alt="Harika and Bikshamaiah together" />
-        </div>
-        <div class="couple-showcase-content">
-          <p class="eyebrow">Together in love</p>
-          <h2>Two hearts, one beautiful beginning</h2>
-          <p>We are delighted to celebrate this wonderful milestone with you. Join us as we step into a new chapter filled with affection, grace, and cherished memories.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="invitation">
-      <h2>Invitation</h2>
-      <p class="lead">With profound happiness and humble hearts, Medikonda Balaiah &amp; Nirmala request the pleasure of your blessings as their daughter Harika is joined in marriage to Bikshamaiah, son of (late) Sri Maloji Chennaiah &amp; Smt Sugunamma of Venkatagiri Village &amp; Yedulapuram Municipality, Khammam District.</p>
-      <div class="card reveal-on-scroll" id="invitationCard">
-        <div class="gold-frame"></div>
-        <p>We cordially invite you to honour the couple with your presence and love on the auspicious occasion of their wedding ceremony.</p>
-        <p style="margin-top:1.5rem;"><strong>Hosted by:</strong> Medikonda Balaiah &amp; Nirmala</p>
-        <p style="margin-top:0.85rem;"><strong>Contact:</strong> 90324 57356 / 99088 50696</p>
-      </div>
-    </section>
-
-    <section class="section" id="countdown">
-      <h2>Countdown to Muhurtham</h2>
-      <p class="lead">The ceremony begins at 5:25 PM on Saturday, 22 August 2026. The day is set to become a memory wrapped in warmth, elegance and family blessings.</p>
-      <div class="countdown-grid reveal-on-scroll" id="countdownGrid">
-        <div class="countdown-card"><div class="countdown-value" id="days">00</div><span class="countdown-label">Days</span></div>
-        <div class="countdown-card"><div class="countdown-value" id="hours">00</div><span class="countdown-label">Hours</span></div>
-        <div class="countdown-card"><div class="countdown-value" id="minutes">00</div><span class="countdown-label">Minutes</span></div>
-        <div class="countdown-card"><div class="countdown-value" id="seconds">00</div><span class="countdown-label">Seconds</span></div>
-      </div>
-    </section>
-
-    <section class="section" id="scratch">
-      <h2>Reveal the special date</h2>
-      <p class="lead">Gently reveal the wedding date by scratching the elegant gold surface.</p>
-      <div class="scratch-panel reveal-on-scroll">
-        <div class="scratch-card" id="scratchCard">
-          <div class="scratch-back">
-            <h3>22 August 2026</h3>
-            <p>May every blessing arrive with this day.</p>
+    <!-- Couple Showcase -->
+    <section class="couple-showcase-section" id="couple">
+      <div class="container">
+        <div class="couple-showcase-card glass-morphism">
+          <div class="gold-accent top-right"></div>
+          <div class="gold-accent bottom-left"></div>
+          <div class="couple-showcase-image overflow-hidden">
+            <img src="assets/images/bride-groom.jpeg" alt="Harika and Bikshamaiah together" class="parallax-img" loading="lazy" />
+            <div class="image-overlay"></div>
           </div>
-          <canvas class="scratch-overlay" id="scratchCanvas"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="timeline">
-      <h2>Event Timeline</h2>
-      <p class="lead">Every moment is arranged with grace, from the sacred muhurtham to the celebration and family gathering.</p>
-      <div class="timeline reveal-on-scroll">
-        <div class="timeline-item">
-          <div class="timeline-label">Muhurtham</div>
-          <div class="timeline-content">
-            <h3>Saturday, 22 Aug 2026</h3>
-            <p>5:25 PM — At the Residence, Madupalli (V), Madhira (M), Khammam (Dt)</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-label">Lunch</div>
-          <div class="timeline-content">
-            <h3>Sunday, 23 Aug 2026</h3>
-            <p>11:00 AM — At the Residence, Madupalli (V), Madhira (M), Khammam (Dt)</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-label">Marriage</div>
-          <div class="timeline-content">
-            <h3>Sunday, 23 Aug 2026</h3>
-            <p>11:23 AM — Sree Laxmi Tirupatamma Convention Function Hall, Gudimalla (V), Yedulapuram (Municipality), Khammam (Dt)</p>
+          <div class="couple-showcase-content">
+            <p class="eyebrow">Together in love</p>
+            <h2 class="split-text">Two hearts, one beautiful beginning</h2>
+            <p class="fade-text">We are delighted to celebrate this wonderful milestone with you. Join us as we step into a new chapter filled with affection, grace, and cherished memories.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="venue">
-      <h2>Venue &amp; Directions</h2>
-      <p class="lead">The marriage ceremony will take place at the elegant Sree Laxmi Tirupatamma Convention Function Hall in Gudimalla, Khammam District.</p>
-      <div class="map-grid reveal-on-scroll">
-        <div class="map-card">
-          <iframe src="https://www.google.com/maps?q=Sree%20Laxmi%20Tirupatamma%20Convention%20Function%20Hall%20Gudimalla&output=embed"></iframe>
-          <p>Sree Laxmi Tirupatamma Convention Function Hall, Gudimalla (V), Yedulapuram Municipality, Khammam District</p>
-          <a href="https://www.google.com/maps/dir/?api=1&destination=Sree+Laxmi+Tirupatamma+Convention+Function+Hall+Gudimalla" target="_blank" rel="noreferrer">Get Directions</a>
+    <!-- Invitation Section -->
+    <section class="invitation-section" id="invitation">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title split-text">Invitation</h2>
+          <p class="section-lead fade-text">With profound happiness and humble hearts, Medikonda Balaiah &amp; Nirmala request the pleasure of your blessings as their daughter Harika is joined in marriage to Bikshamaiah, son of (late) Sri Maloji Chennaiah &amp; Smt Sugunamma of Venkatagiri Village &amp; Yedulapuram Municipality, Khammam District.</p>
         </div>
-        <div class="rsvp-card">
-          <form id="rsvpForm">
-            <div class="rsvp-grid">
-              <div class="field">
-                <label for="name">Name</label>
-                <input id="name" name="name" placeholder="Your full name" required />
-              </div>
-              <div class="field">
-                <label for="guests">Number of Guests</label>
-                <select id="guests" name="guests">
-                  <option value="">Select</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5+</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Your blessings and warm wishes"></textarea>
-              </div>
-              <button type="submit" style="width:100%;padding:0.95rem 1rem;border:none;border-radius:16px;background:linear-gradient(120deg,var(--accent),var(--accent-soft));color:white;font-weight:700;cursor:pointer;box-shadow:0 16px 35px rgba(184,137,90,0.2)">Send RSVP</button>
+        
+        <div class="invitation-card glass-morphism">
+          <div class="invitation-border-gold"></div>
+          <div class="wax-seal">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23b8895a' opacity='0.2'/><text x='50' y='55' font-family='Playfair Display' font-size='30' text-anchor='middle' fill='%23b8895a'>H&amp;B</text></svg>" alt="Seal" />
+          </div>
+          <p class="fade-text">We cordially invite you to honour the couple with your presence and love on the auspicious occasion of their wedding ceremony.</p>
+          <div class="host-info fade-text">
+            <p><strong>Hosted by:</strong></p>
+            <p class="luxury-font">Medikonda Balaiah &amp; Nirmala</p>
+          </div>
+          <div class="contact-info fade-text">
+            <p><strong>Contact:</strong></p>
+            <p>90324 57356 <span class="dot-separator">&bull;</span> 99088 50696</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section" id="countdown">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title split-text">Countdown to Muhurtham</h2>
+          <p class="section-lead fade-text">The ceremony begins at 5:25 PM on Saturday, 22 August 2026. The day is set to become a memory wrapped in warmth, elegance and family blessings.</p>
+        </div>
+        
+        <div class="countdown-grid">
+          <div class="countdown-ring glass-morphism">
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="progress-ring__circle" stroke="rgba(184,137,90,0.2)" stroke-width="4" fill="transparent" r="54" cx="60" cy="60"/>
+              <circle class="progress-ring__circle progress-ring__value" id="ring-days" stroke="#b8895a" stroke-width="4" fill="transparent" r="54" cx="60" cy="60"/>
+            </svg>
+            <div class="countdown-content">
+              <div class="countdown-value" id="val-days">00</div>
+              <span class="countdown-label">Days</span>
             </div>
-          </form>
-          <div class="rsvp-extra">
-            <span>Saved locally on your device</span>
-            <span>Fallback option: <a href="mailto:medikonda.events@example.com?subject=Harika%20%26%20Bikshamaiah%20RSVP" style="color: var(--accent); text-decoration: none;">Email us directly</a></span>
+          </div>
+          <div class="countdown-ring glass-morphism">
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="progress-ring__circle" stroke="rgba(184,137,90,0.2)" stroke-width="4" fill="transparent" r="54" cx="60" cy="60"/>
+              <circle class="progress-ring__circle progress-ring__value" id="ring-hours" stroke="#b8895a" stroke-width="4" fill="transparent" r="54" cx="60" cy="60"/>
+            </svg>
+            <div class="countdown-content">
+              <div class="countdown-value" id="val-hours">00</div>
+              <span class="countdown-label">Hours</span>
+            </div>
+          </div>
+          <div class="countdown-ring glass-morphism">
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="progress-ring__circle" stroke="rgba(184,137,90,0.2)" stroke-width="4" fill="transparent" r="54" cx="60" cy="60"/>
+              <circle class="progress-ring__circle progress-ring__value" id="ring-minutes" stroke="#b8895a" stroke-width="4" fill="transparent" r="54" cx="60" cy="60"/>
+            </svg>
+            <div class="countdown-content">
+              <div class="countdown-value" id="val-minutes">00</div>
+              <span class="countdown-label">Minutes</span>
+            </div>
+          </div>
+          <div class="countdown-ring glass-morphism">
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="progress-ring__circle" stroke="rgba(184,137,90,0.2)" stroke-width="4" fill="transparent" r="54" cx="60" cy="60"/>
+              <circle class="progress-ring__circle progress-ring__value" id="ring-seconds" stroke="#b8895a" stroke-width="4" fill="transparent" r="54" cx="60" cy="60"/>
+            </svg>
+            <div class="countdown-content">
+              <div class="countdown-value" id="val-seconds">00</div>
+              <span class="countdown-label">Seconds</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="footer">
-      <p><strong>Hosted by Medikonda Balaiah &amp; Nirmala</strong></p>
-      <p>Contact: 90324 57356 / 99088 50696</p>
-      <p>With love, the Medikonda family.</p>
+    <!-- Event Timeline Section -->
+    <section class="timeline-section" id="timeline">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title split-text">Event Timeline</h2>
+          <p class="section-lead fade-text">Every moment is arranged with grace, from the sacred muhurtham to the celebration and family gathering.</p>
+        </div>
+        
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content glass-morphism">
+              <span class="timeline-label">Muhurtham</span>
+              <h3>Saturday, 22 Aug 2026</h3>
+              <p>5:25 PM &mdash; At the Residence, Madupalli (V), Madhira (M), Khammam (Dt)</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content glass-morphism">
+              <span class="timeline-label">Lunch</span>
+              <h3>Sunday, 23 Aug 2026</h3>
+              <p>11:00 AM &mdash; At the Residence, Madupalli (V), Madhira (M), Khammam (Dt)</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content glass-morphism">
+              <span class="timeline-label">Marriage</span>
+              <h3>Sunday, 23 Aug 2026</h3>
+              <p>11:23 AM &mdash; Sree Laxmi Tirupatamma Convention Function Hall, Gudimalla (V), Yedulapuram (Municipality), Khammam (Dt)</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </section>
+
+    <!-- Venue & RSVP Section -->
+    <section class="venue-rsvp-section" id="venue-rsvp">
+      <div class="container">
+        <div class="split-grid">
+          
+          <div class="venue-col">
+            <h2 class="section-title text-left split-text">Venue</h2>
+            <div class="venue-card glass-morphism fade-up">
+              <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps?q=Sree%20Laxmi%20Tirupatamma%20Convention%20Function%20Hall%20Gudimalla&output=embed" loading="lazy" title="Venue Map"></iframe>
+              </div>
+              <div class="venue-details">
+                <p>Sree Laxmi Tirupatamma Convention Function Hall, Gudimalla (V), Yedulapuram Municipality, Khammam District</p>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Sree+Laxmi+Tirupatamma+Convention+Function+Hall+Gudimalla" target="_blank" rel="noreferrer" class="luxury-btn">Get Directions</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rsvp-col">
+            <h2 class="section-title text-left split-text">RSVP</h2>
+            <div class="rsvp-card glass-morphism fade-up">
+              <form id="rsvpForm" class="rsvp-form">
+                <div class="input-group">
+                  <input type="text" id="name" name="name" required />
+                  <label for="name">Your Name</label>
+                  <div class="input-border"></div>
+                </div>
+                <div class="input-group">
+                  <select id="guests" name="guests" required>
+                    <option value="" disabled selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5+">5+</option>
+                  </select>
+                  <label for="guests">Number of Guests</label>
+                  <div class="input-border"></div>
+                </div>
+                <div class="input-group">
+                  <textarea id="message" name="message" rows="3" required></textarea>
+                  <label for="message">Your Blessings</label>
+                  <div class="input-border"></div>
+                </div>
+                <button type="submit" class="luxury-btn submit-btn">
+                  <span>Send RSVP</span>
+                </button>
+              </form>
+              
+              <div class="rsvp-success" style="display:none;" id="rsvpSuccess">
+                <div class="success-icon">✓</div>
+                <h3>Thank You!</h3>
+                <p>Your RSVP has been saved. We look forward to sharing this magical day with you.</p>
+              </div>
+              
+              <div class="rsvp-extra">
+                <span>Stored securely on your device</span>
+                <span>Fallback: <a href="mailto:medikonda.events@example.com?subject=Harika%20%26%20Bikshamaiah%20RSVP">Email us</a></span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container text-center">
+        <p class="footer-hosted">Hosted by Medikonda Balaiah &amp; Nirmala</p>
+        <p class="footer-contact">Contact: 90324 57356 / 99088 50696</p>
+        <p class="footer-signature">With love, the Medikonda family.</p>
+      </div>
+    </footer>
+    
+  </main>
+
+  <!-- Audio Player -->
+  <div class="music-player glass-morphism">
+    <button id="musicToggle" class="music-btn" aria-label="Toggle background music">
+      <span class="icon">♪</span>
+    </button>
   </div>
 
-  <button class="music-control" id="musicToggle" type="button" aria-label="Toggle background music"><span>♪</span></button>
+  <!-- Audio Element -->
+  <audio id="bg-audio" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
 
-  <script>
-    const heroCanvas = document.getElementById('heroCanvas');
-    const scratchCanvas = document.getElementById('scratchCanvas');
-    const scratchCard = document.getElementById('scratchCard');
-    const musicToggle = document.getElementById('musicToggle');
-    const revealCards = document.querySelectorAll('.reveal-on-scroll');
+  <!-- External Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.16 });
+  <!-- Internal Scripts -->
+  <script type="module" src="js/firebase.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/script.js"></script>
 
-    revealCards.forEach((card) => observer.observe(card));
-
-    const resizeCanvas = () => {
-      const dpi = window.devicePixelRatio || 1;
-      heroCanvas.width = heroCanvas.clientWidth * dpi;
-      heroCanvas.height = heroCanvas.clientHeight * dpi;
-      scratchCanvas.width = scratchCard.clientWidth * dpi;
-      scratchCanvas.height = scratchCard.clientHeight * dpi;
-      const ctx = heroCanvas.getContext('2d');
-      ctx.scale(dpi, dpi);
-      ctx.fillStyle = 'rgba(255,255,255,0.12)';
-      ctx.fillRect(0, 0, heroCanvas.clientWidth, heroCanvas.clientHeight);
-    };
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    const form = document.getElementById('rsvpForm');
-    const saved = JSON.parse(localStorage.getItem('harikaBikshamaiahRSVP') || '[]');
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const data = new FormData(form);
-      saved.push({ name: data.get('name'), guests: data.get('guests'), message: data.get('message') });
-      localStorage.setItem('harikaBikshamaiahRSVP', JSON.stringify(saved));
-      alert('Thank you for your RSVP!');
-      form.reset();
-    };
-    form.addEventListener('submit', handleSubmit);
-
-    let audio = null;
-    let isPlaying = false;
-    const toggleAudio = async () => {
-      if (!audio) {
-        audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-        audio.loop = true;
-      }
-      if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-      } else {
-        try {
-          await audio.play();
-          isPlaying = true;
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      musicToggle.querySelector('span').textContent = isPlaying ? '♫' : '♪';
-    };
-    musicToggle.addEventListener('click', toggleAudio);
-
-    let isScratching = false;
-    const scratchCtx = scratchCanvas.getContext('2d');
-    scratchCtx.fillStyle = '#d8b16e';
-    scratchCtx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
-    scratchCtx.globalCompositeOperation = 'destination-out';
-    scratchCanvas.addEventListener('pointerdown', () => { isScratching = true; });
-    scratchCanvas.addEventListener('pointerup', () => { isScratching = false; });
-    scratchCanvas.addEventListener('pointermove', (event) => {
-      if (!isScratching) return;
-      const rect = scratchCanvas.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      scratchCtx.beginPath();
-      scratchCtx.arc(x, y, 14, 0, Math.PI * 2);
-      scratchCtx.fill();
-    });
-  </script>
 </body>
 </html>
