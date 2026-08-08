@@ -117,7 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .to('.intro-t2', { opacity: 0, y: -15, duration: 1.2, ease: 'power2.in' }, "+=1.5")
     .fromTo('.intro-names', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 2, ease: 'power3.out' })
     .fromTo('.intro-name', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, stagger: 0.3, ease: 'power3.out' }, "-=1.5")
-    .fromTo('.intro-heart', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: 'back.out(1.7)' }, "-=1");
+    .fromTo('.intro-heart', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: 'back.out(1.7)' }, "-=1")
+    .fromTo('#skip-intro', { opacity: 0 }, { opacity: 1, duration: 1, ease: 'power2.inOut' }, "-=0.5");
 
   
   // --- Main Animations (trigger after intro) ---

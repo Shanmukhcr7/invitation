@@ -47,7 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  skipBtn.addEventListener('click', hideIntro);
+  window.hideIntroFromAnimation = hideIntro;
+
+  if (skipBtn) skipBtn.addEventListener('click', hideIntro);
 
   // Audio Player Logic
   const musicToggle = document.getElementById('musicToggle');
