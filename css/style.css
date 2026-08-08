@@ -545,6 +545,42 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
+   Parents Section
+   ========================================================================== */
+.parents-section {
+  padding: 2rem 0;
+}
+
+.parents-card {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  background: var(--white-pure);
+  padding: 1rem;
+}
+
+.parents-image-wrapper {
+  border-radius: 15px;
+  position: relative;
+  aspect-ratio: 16/9;
+}
+
+.parents-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .parents-image-wrapper {
+    aspect-ratio: 4/3;
+  }
+}
+
+/* ==========================================================================
    Invitation Section
    ========================================================================== */
 .invitation-section {
