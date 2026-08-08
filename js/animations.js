@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Image Curtain Reveal on Scroll
-    gsap.to('.couple-showcase-image.curtain-reveal', {
+    gsap.to('.parallax-img.curtain-reveal', {
       clipPath: 'inset(0% 0% 0% 0%)',
       duration: 1.5,
       ease: 'power4.inOut',
