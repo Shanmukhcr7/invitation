@@ -70,24 +70,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   musicToggle.addEventListener('click', toggleMusic);
 
-  // Attempt to play immediately on load
-  const playPromise = bgAudio.play();
-  if (playPromise !== undefined) {
-    playPromise.then(() => {
-      isPlaying = true;
-      musicIcon.innerHTML = '&#9835;';
-      musicToggle.classList.add('playing');
-    }).catch(error => {
-      console.log("Autoplay blocked by browser policy. Waiting for user interaction.");
+  // Tap to Open Logic (guarantees autoplay)
+  const tapToOpen = document.getElementById('tap-to-open');
+  if (tapToOpen) {
+    tapToOpen.addEventListener('click', () => {
+      // 1. Play Music immediately on user interaction
+      if (!isPlaying) toggleMusic();
+      
+      // 2. Hide Tap Overlay & Show Intro Content
+      gsap.to(tapToOpen, { opacity: 0, duration: 0.5, onComplete: () => {
+        tapToOpen.style.display = 'none';
+        
+        const introContent = document.getElementById('intro-content');
+        const skipBtn = document.getElementById('skip-intro');
+        
+        if (introContent) {
+          introContent.style.display = 'block';
+          gsap.to(introContent, { opacity: 1, duration: 0.5 });
+        }
+        
+        if (skipBtn) skipBtn.style.display = 'block';
+        
+        // 3. Play the cinematic text/Lottie sequence
+        if (window.introTL) {
+          window.introTL.play();
+        }
+      }});
     });
   }
-
-  // Fallback for browsers that block autoplay: play on first user interaction anywhere
-  document.body.addEventListener('click', () => {
-    if (!isPlaying) {
-      toggleMusic();
-    }
-  }, { once: true });
 
   // Countdown Logic
   const targetDate = new Date("Aug 22, 2026 17:25:00").getTime();

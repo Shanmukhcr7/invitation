@@ -98,12 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const introTL = gsap.timeline({
+    paused: true,
     onComplete: () => {
       setTimeout(() => {
         if (window.hideIntroFromAnimation) window.hideIntroFromAnimation();
       }, 1500);
     }
   });
+
+  window.introTL = introTL;
 
   introTL
     .to('#lottie-lotus', { opacity: 1, duration: 1 })
