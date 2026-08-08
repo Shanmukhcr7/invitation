@@ -109,14 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
   window.introTL = introTL;
 
   introTL
-    .to('#lottie-lotus', { opacity: 1, duration: 1 })
-    .call(() => { try { lot.play(); } catch(e){} }, null, "-=0.5")
-    .fromTo('.intro-t1', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, "+=0.5")
-    .to('.intro-t1', { opacity: 0, y: -10, duration: 0.8, ease: 'power2.in' }, "+=1")
-    .fromTo('.intro-t2', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' })
-    .to('.intro-t2', { opacity: 0, y: -10, duration: 0.8, ease: 'power2.in' }, "+=1")
-    .fromTo('.intro-names', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' })
-    .fromTo('.intro-name', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out' }, "-=1");
+    .to('#lottie-lotus', { opacity: 1, duration: 1.5, ease: 'power2.inOut' })
+    .call(() => { try { lot.play(); } catch(e){} }, null, "-=1")
+    .fromTo('.intro-t1', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 1.5, ease: 'power2.out' }, "-=0.5")
+    .to('.intro-t1', { opacity: 0, y: -15, duration: 1.2, ease: 'power2.in' }, "+=1.5")
+    .fromTo('.intro-t2', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 1.5, ease: 'power2.out' })
+    .to('.intro-t2', { opacity: 0, y: -15, duration: 1.2, ease: 'power2.in' }, "+=1.5")
+    .fromTo('.intro-names', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 2, ease: 'power3.out' })
+    .fromTo('.intro-name', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, stagger: 0.3, ease: 'power3.out' }, "-=1.5")
+    .fromTo('.intro-heart', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: 'back.out(1.7)' }, "-=1");
 
   
   // --- Main Animations (trigger after intro) ---
@@ -185,8 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 1,
         y: 0,
         rotateX: 0,
-        duration: 0.8,
-        stagger: 0.02,
+        duration: 1,
+        stagger: 0.04,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,

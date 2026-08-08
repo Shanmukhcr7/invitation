@@ -70,28 +70,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   musicToggle.addEventListener('click', toggleMusic);
 
-  // Tap to Open Logic (guarantees autoplay)
+  // Tap to Open Logic (guarantees autoplay and elegant transition)
   const tapToOpen = document.getElementById('tap-to-open');
   if (tapToOpen) {
     tapToOpen.addEventListener('click', () => {
-      // 1. Play Music immediately on user interaction
       if (!isPlaying) toggleMusic();
       
-      // 2. Hide Tap Overlay & Show Intro Content
-      gsap.to(tapToOpen, { opacity: 0, duration: 0.5, onComplete: () => {
+      // Fade out the gate and start intro
+      gsap.to(tapToOpen, { opacity: 0, duration: 1, ease: 'power2.inOut', onComplete: () => {
         tapToOpen.style.display = 'none';
         
         const introContent = document.getElementById('intro-content');
-        const skipBtn = document.getElementById('skip-intro');
-        
         if (introContent) {
-          introContent.style.display = 'block';
-          gsap.to(introContent, { opacity: 1, duration: 0.5 });
+          gsap.to(introContent, { opacity: 1, duration: 1, ease: 'power2.inOut' });
         }
         
-        if (skipBtn) skipBtn.style.display = 'block';
-        
-        // 3. Play the cinematic text/Lottie sequence
         if (window.introTL) {
           window.introTL.play();
         }
