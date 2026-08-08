@@ -1,16 +1,78 @@
 // js/animations.js
 
-// Make GSAP SplitText substitute (since we don't have the club plugin, we'll manually split words/lines)
+// Character Split Logic (replaces word split)
 function setupSplitText() {
   const splitElements = document.querySelectorAll('.split-text');
   splitElements.forEach(el => {
     const text = el.innerText;
     el.innerHTML = '';
     const words = text.split(' ');
+    
     words.forEach(word => {
-      const span = document.createElement('span');
-      span.innerText = word + ' ';
-      el.appendChild(span);
+      const wordSpan = document.createElement('span');
+      wordSpan.style.display = 'inline-block';
+      wordSpan.style.whiteSpace = 'nowrap';
+      
+      const chars = word.split('');
+      chars.forEach(char => {
+        const charSpan = document.createElement('span');
+        charSpan.classList.add('char');
+        charSpan.innerText = char;
+        wordSpan.appendChild(charSpan);
+      });
+      
+      el.appendChild(wordSpan);
+      // Add space between words
+      el.appendChild(document.createTextNode(' '));
+    });
+  });
+}
+
+// 3D Tilt Logic
+function initTilt() {
+  const tiltCards = document.querySelectorAll('.tilt-effect');
+  
+  tiltCards.forEach(card => {
+    const xTo = gsap.quickTo(card, "rotateY", {duration: 0.8, ease: "power3"});
+    const yTo = gsap.quickTo(card, "rotateX", {duration: 0.8, ease: "power3"});
+    
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width; // 0 to 1
+      const y = (e.clientY - rect.top) / rect.height; // 0 to 1
+      
+      const multiplier = 20; // max rotation degrees
+      xTo((x - 0.5) * multiplier);
+      yTo(-(y - 0.5) * multiplier);
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      xTo(0);
+      yTo(0);
+    });
+  });
+}
+
+// Magnetic Buttons Logic
+function initMagneticButtons() {
+  const magneticElements = document.querySelectorAll('.luxury-btn, .music-btn');
+  
+  magneticElements.forEach(el => {
+    const xTo = gsap.quickTo(el, "x", {duration: 0.6, ease: "elastic.out(1, 0.3)"});
+    const yTo = gsap.quickTo(el, "y", {duration: 0.6, ease: "elastic.out(1, 0.3)"});
+    
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - (rect.left + rect.width / 2);
+      const y = e.clientY - (rect.top + rect.height / 2);
+      
+      xTo(x * 0.4);
+      yTo(y * 0.4);
+    });
+    
+    el.addEventListener('mouseleave', () => {
+      xTo(0);
+      yTo(0);
     });
   });
 }
@@ -18,6 +80,13 @@ function setupSplitText() {
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
   setupSplitText();
+  initTilt();
+  initMagneticButtons();
+
+  // Add curtain-reveal class to images
+  document.querySelectorAll('.parallax-img, .portrait-img-wrapper').forEach(img => {
+    img.classList.add('curtain-reveal');
+  });
 
   // --- Intro Sequence (Lottie + GSAP) ---
   const lot = lottie.loadAnimation({
@@ -25,13 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer: 'svg',
     loop: false,
     autoplay: false,
-    // Provide a simple local fallback or online lottie JSON (using a generic lotus/flower lottie if possible, else we skip)
     path: 'https://assets9.lottiefiles.com/packages/lf20_syqn3iue.json' 
   });
 
   const introTL = gsap.timeline({
     onComplete: () => {
-      // Auto-hide intro after a few seconds
       setTimeout(() => {
         if (window.hideIntroFromAnimation) window.hideIntroFromAnimation();
       }, 1500);
@@ -46,31 +113,49 @@ document.addEventListener('DOMContentLoaded', () => {
     .to('.intro-t2', { opacity: 1, y: 0, duration: 1, ease: 'power2.out' })
     .to('.intro-t2', { opacity: 0, y: -10, duration: 0.8, ease: 'power2.in' }, "+=1")
     .to('.intro-names', { opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' })
-    .from('.intro-name', { y: 20, opacity: 0, duration: 1, stagger: 0.2, ease: 'power3.out' }, "-=1");
+    .fromTo('.intro-name', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out' }, "-=1");
 
   
   // --- Main Animations (trigger after intro) ---
   window.addEventListener('introComplete', () => {
     
     // Hero Animation
-    gsap.from('.hero-label', { opacity: 0, y: -20, duration: 1, ease: 'power3.out' });
-    gsap.from('.title-word', { opacity: 0, y: 50, duration: 1.2, ease: 'power4.out', stagger: 0.2, delay: 0.2 });
-    gsap.from('.title-amp', { opacity: 0, scale: 0.5, duration: 1, ease: 'back.out(1.7)', delay: 0.5 });
-    gsap.from('.hero-divider', { width: 0, duration: 1.5, ease: 'power4.inOut', delay: 0.8 });
-    gsap.from('.hero-subtitle', { opacity: 0, y: 20, duration: 1, delay: 1 });
-    gsap.from('.portrait-card', { opacity: 0, y: 100, duration: 1.2, stagger: 0.3, ease: 'power3.out', delay: 1.2 });
+    gsap.fromTo('.hero-label', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+    gsap.fromTo('.title-word', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out', stagger: 0.2, delay: 0.2 });
+    gsap.fromTo('.title-amp', { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.7)', delay: 0.5 });
+    gsap.fromTo('.hero-divider', { width: 0 }, { width: 150, duration: 1.5, ease: 'power4.inOut', delay: 0.8 });
+    gsap.fromTo('.hero-subtitle', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, delay: 1 });
     
-    // Scroll Animations
+    // Animate Portraits (Curtain Reveal + Slide up)
+    gsap.fromTo('.portrait-card', { opacity: 0, y: 100 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.3, ease: 'power3.out', delay: 1.2 });
+    gsap.to('.portrait-img-wrapper', { 
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      duration: 1.5, 
+      ease: 'power4.inOut',
+      stagger: 0.3,
+      delay: 1.4
+    });
     
-    // Couple Showcase
+    // Couple Showcase Parallax
     gsap.to('.couple-showcase-image img', {
-      yPercent: 10,
+      yPercent: 15,
       ease: 'none',
       scrollTrigger: {
         trigger: '.couple-showcase-section',
         start: 'top bottom',
         end: 'bottom top',
         scrub: true
+      }
+    });
+
+    // Image Curtain Reveal on Scroll
+    gsap.to('.couple-showcase-image.curtain-reveal', {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      duration: 1.5,
+      ease: 'power4.inOut',
+      scrollTrigger: {
+        trigger: '.couple-showcase-section',
+        start: 'top 75%'
       }
     });
 
@@ -89,15 +174,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Split text reveals
+    // Advanced Character Split reveals
     const splitSections = document.querySelectorAll('.split-text');
     splitSections.forEach(el => {
-      const spans = el.querySelectorAll('span');
-      gsap.to(spans, {
+      const chars = el.querySelectorAll('.char');
+      gsap.to(chars, {
         opacity: 1,
         y: 0,
+        rotateX: 0,
         duration: 0.8,
-        stagger: 0.05,
+        stagger: 0.02,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
@@ -107,8 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Timeline Line Drawing
-    gsap.from('.timeline-line', {
-      scaleY: 0,
+    gsap.fromTo('.timeline-line', { scaleY: 0 }, {
+      scaleY: 1,
       transformOrigin: 'top center',
       ease: 'none',
       scrollTrigger: {
@@ -122,9 +208,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Timeline Items
     const tlItems = document.querySelectorAll('.timeline-item');
     tlItems.forEach(item => {
-      gsap.from(item.querySelector('.timeline-content'), {
-        opacity: 0,
-        x: item.style.justifyContent === 'flex-start' ? 50 : -50,
+      gsap.fromTo(item.querySelector('.timeline-content'), { opacity: 0, x: item.style.justifyContent === 'flex-start' ? 50 : -50 }, {
+        opacity: 1,
+        x: 0,
         duration: 1,
         ease: 'power3.out',
         scrollTrigger: {
@@ -132,9 +218,9 @@ document.addEventListener('DOMContentLoaded', () => {
           start: 'top 75%'
         }
       });
-      gsap.from(item.querySelector('.timeline-dot'), {
-        scale: 0,
-        opacity: 0,
+      gsap.fromTo(item.querySelector('.timeline-dot'), { scale: 0, opacity: 0 }, {
+        scale: 1,
+        opacity: 1,
         duration: 0.5,
         ease: 'back.out(1.7)',
         scrollTrigger: {
@@ -146,14 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   });
 
-  // --- Three.js Background (Gold Dust/Particles) ---
   initThreeJS();
-  
-  // --- Canvas 2D Background (Falling Petals) ---
   initPetals();
 });
 
-// Three.js Implementation
 function initThreeJS() {
   const canvas = document.getElementById('bg-canvas-3d');
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -161,15 +243,13 @@ function initThreeJS() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   const scene = new THREE.Scene();
-  // We want a subtle fog
   scene.fog = new THREE.FogExp2(0xfdfbf7, 0.001);
 
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.z = 30;
 
-  // Particles
   const particlesGeometry = new THREE.BufferGeometry();
-  const particlesCount = 800; // Optimize count
+  const particlesCount = 800; 
   const posArray = new Float32Array(particlesCount * 3);
 
   for (let i = 0; i < particlesCount * 3; i++) {
@@ -178,7 +258,6 @@ function initThreeJS() {
 
   particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
   
-  // Create circular texture for particles
   const circleTexture = new THREE.CanvasTexture(createCircleCanvas());
   
   const particlesMaterial = new THREE.PointsMaterial({
@@ -186,7 +265,7 @@ function initThreeJS() {
     map: circleTexture,
     transparent: true,
     opacity: 0.6,
-    color: 0xb8895a, // Gold
+    color: 0xb8895a,
     blending: THREE.AdditiveBlending,
     depthWrite: false
   });
@@ -194,7 +273,6 @@ function initThreeJS() {
   const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
   scene.add(particlesMesh);
 
-  // Mouse interactivity
   let mouseX = 0;
   let mouseY = 0;
   
@@ -212,7 +290,6 @@ function initThreeJS() {
     particlesMesh.rotation.y = elapsedTime * 0.05;
     particlesMesh.rotation.x = elapsedTime * 0.02;
 
-    // Subtle mouse parallax
     camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
     camera.position.y += (-mouseY * 5 - camera.position.y) * 0.05;
     camera.lookAt(scene.position);
@@ -241,7 +318,6 @@ function createCircleCanvas() {
   return canvas;
 }
 
-// Canvas 2D implementation (Falling Petals)
 function initPetals() {
   const canvas = document.getElementById('bg-canvas-2d');
   const ctx = canvas.getContext('2d');
@@ -250,7 +326,7 @@ function initPetals() {
   canvas.height = window.innerHeight;
   
   const petals = [];
-  const petalCount = 30; // Not too many to maintain 60fps
+  const petalCount = 30; 
 
   class Petal {
     constructor() {
@@ -264,13 +340,12 @@ function initPetals() {
       this.speed = Math.random() * 1 + 0.5;
       this.angle = Math.random() * Math.PI * 2;
       this.spin = Math.random() * 0.02 - 0.01;
-      this.color = `rgba(217, 169, 160, ${Math.random() * 0.5 + 0.2})`; // Rose gold / soft pink
+      this.color = `rgba(217, 169, 160, ${Math.random() * 0.5 + 0.2})`; 
     }
     
     update() {
       this.y += this.speed;
       this.angle += this.spin;
-      // Gentle wind effect
       this.x += Math.sin(this.angle) * 0.5;
       
       if (this.y > canvas.height + 20) {
@@ -284,7 +359,6 @@ function initPetals() {
       ctx.translate(this.x, this.y);
       ctx.rotate(this.angle);
       
-      // Simple petal shape
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.bezierCurveTo(this.size, -this.size, this.size*2, 0, this.size*1.5, this.size);

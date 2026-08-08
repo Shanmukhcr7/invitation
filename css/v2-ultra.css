@@ -1,0 +1,42 @@
+/* Appended to existing style.css */
+/* ==========================================================================
+   V2 Ultra Animations Helpers
+   ========================================================================== */
+.portrait-grid {
+  perspective: 1200px;
+}
+
+.tilt-effect {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-effect .portrait-img-wrapper {
+  transform: translateZ(30px);
+}
+
+.tilt-effect .sparkle {
+  transform: translateZ(50px);
+}
+
+.tilt-effect .portrait-caption {
+  transform: translateZ(20px);
+}
+
+/* Cinematic Image Reveal Mask */
+.curtain-reveal {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  will-change: clip-path;
+}
+
+.magnetic-wrap {
+  display: inline-block;
+}
+
+/* Character Splitting */
+.char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) rotateX(-45deg);
+  transform-origin: bottom center;
+}
