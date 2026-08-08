@@ -70,9 +70,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   musicToggle.addEventListener('click', toggleMusic);
 
+  // Attempt to play immediately on load
+  const playPromise = bgAudio.play();
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      isPlaying = true;
+      musicIcon.innerHTML = '&#9835;';
+      musicToggle.classList.add('playing');
+    }).catch(error => {
+      console.log("Autoplay blocked by browser policy. Waiting for user interaction.");
+    });
+  }
+
   // Fallback for browsers that block autoplay: play on first user interaction anywhere
   document.body.addEventListener('click', () => {
-    if (!isPlaying && introSkipped) {
+    if (!isPlaying) {
       toggleMusic();
     }
   }, { once: true });
