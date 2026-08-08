@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cinematic Auto-Scroll Logic
   let isAutoScrolling = false;
-  const autoScrollSpeed = 0.6; // pixels per frame
+  const autoScrollSpeed = 1.5; // pixels per frame
 
   const stopAutoScroll = () => {
     isAutoScrolling = false;
