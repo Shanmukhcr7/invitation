@@ -469,7 +469,7 @@ h1, h2, h3, h4, h5, h6 {
    Couple Showcase Section
    ========================================================================== */
 .couple-showcase-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 .couple-showcase-card {
@@ -544,7 +544,7 @@ h1, h2, h3, h4, h5, h6 {
    Invitation Section
    ========================================================================== */
 .invitation-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
   position: relative;
 }
 
@@ -599,7 +599,7 @@ h1, h2, h3, h4, h5, h6 {
    Countdown Section
    ========================================================================== */
 .countdown-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 .countdown-grid {
@@ -655,7 +655,7 @@ h1, h2, h3, h4, h5, h6 {
    Timeline Section
    ========================================================================== */
 .timeline-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 .timeline-container {
@@ -737,7 +737,7 @@ h1, h2, h3, h4, h5, h6 {
    Venue & RSVP Section
    ========================================================================== */
 .venue-rsvp-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 .split-grid {
@@ -996,7 +996,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
   .portrait-grid, .countdown-grid { grid-template-columns: 1fr 1fr; }
-  .hero-section { padding-top: 8rem; }
+  .hero-section { padding-top: 4rem; }
   .invitation-card { padding: 3rem 2rem; }
   .couple-showcase-content { padding: 3rem 2rem; }
   .venue-card, .rsvp-card { padding: 2rem; }
