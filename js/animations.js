@@ -107,12 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   introTL
     .to('#lottie-lotus', { opacity: 1, duration: 1 })
-    .call(() => lot.play(), null, "-=0.5")
-    .to('.intro-t1', { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, "+=0.5")
+    .call(() => { try { lot.play(); } catch(e){} }, null, "-=0.5")
+    .fromTo('.intro-t1', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, "+=0.5")
     .to('.intro-t1', { opacity: 0, y: -10, duration: 0.8, ease: 'power2.in' }, "+=1")
-    .to('.intro-t2', { opacity: 1, y: 0, duration: 1, ease: 'power2.out' })
+    .fromTo('.intro-t2', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' })
     .to('.intro-t2', { opacity: 0, y: -10, duration: 0.8, ease: 'power2.in' }, "+=1")
-    .to('.intro-names', { opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' })
+    .fromTo('.intro-names', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' })
     .fromTo('.intro-name', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out' }, "-=1");
 
   
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Animate Portraits (Curtain Reveal + Slide up)
     gsap.fromTo('.portrait-card', { opacity: 0, y: 100 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.3, ease: 'power3.out', delay: 1.2 });
     gsap.to('.portrait-img-wrapper', { 
-      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      clipPath: 'inset(0% 0% 0% 0%)',
       duration: 1.5, 
       ease: 'power4.inOut',
       stagger: 0.3,
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Image Curtain Reveal on Scroll
     gsap.to('.couple-showcase-image.curtain-reveal', {
-      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      clipPath: 'inset(0% 0% 0% 0%)',
       duration: 1.5,
       ease: 'power4.inOut',
       scrollTrigger: {
