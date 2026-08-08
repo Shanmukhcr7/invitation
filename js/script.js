@@ -14,8 +14,31 @@ document.addEventListener('DOMContentLoaded', () => {
     infinite: false,
   });
 
+  // Cinematic Auto-Scroll Logic
+  let isAutoScrolling = false;
+  const autoScrollSpeed = 0.6; // pixels per frame
+
+  const stopAutoScroll = () => {
+    isAutoScrolling = false;
+  };
+
+  window.addEventListener('wheel', stopAutoScroll, { passive: true });
+  window.addEventListener('touchstart', stopAutoScroll, { passive: true });
+  window.addEventListener('mousedown', stopAutoScroll, { passive: true });
+  window.addEventListener('keydown', stopAutoScroll, { passive: true });
+
+  window.addEventListener('introComplete', () => {
+    // Slight delay before starting the auto-scroll for a dramatic effect
+    setTimeout(() => {
+      isAutoScrolling = true;
+    }, 2000);
+  });
+
   function raf(time) {
     lenis.raf(time);
+    if (isAutoScrolling) {
+      window.scrollBy(0, autoScrollSpeed);
+    }
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
